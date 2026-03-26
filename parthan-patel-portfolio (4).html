@@ -1,0 +1,574 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Parthan Patel — Senior Financial Analyst</title>
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400;1,700&family=DM+Mono:wght@300;400;500&family=Syne:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{--gold:#C9A84C;--gold-l:#E8C96A;--gold-p:#F5E6B8;--d:#080808;--d2:#0F0F0F;--d3:#171717;--w:#F5F0E8;--m:#787870;--green:#2ECC71}
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--d);color:var(--w);font-family:'DM Mono',monospace;overflow-x:hidden;cursor:none}
+.cur{width:10px;height:10px;background:var(--gold);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:width .18s,height .18s}
+.rng{width:34px;height:34px;border:1px solid rgba(201,168,76,.7);border-radius:50%;position:fixed;top:0;left:0;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:width .18s,height .18s}
+nav{position:fixed;top:0;left:0;right:0;z-index:500;display:flex;align-items:center;justify-content:space-between;padding:1.3rem 4.5rem;background:linear-gradient(to bottom,rgba(8,8,8,.97) 60%,transparent);border-bottom:1px solid rgba(201,168,76,.07)}
+.logo{font-family:'Playfair Display',serif;font-size:1.25rem;font-weight:900;color:var(--gold)}.logo span{color:var(--w);font-style:italic}
+.nav-links{display:flex;gap:2.5rem;list-style:none}
+.nav-links a{font-size:.67rem;letter-spacing:.16em;text-transform:uppercase;color:var(--m);text-decoration:none;transition:color .22s}
+.nav-links a:hover{color:var(--gold)}
+.btn-hire{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--d);background:var(--gold);border:none;padding:.55rem 1.4rem;cursor:none;transition:background .2s,transform .2s}
+.btn-hire:hover{background:var(--gold-l);transform:translateY(-1px)}
+/* ── HERO ─────────────────────────────────────────── */
+#hero{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding:9rem 4.5rem 6rem;position:relative;overflow:hidden}
+.hbg{position:absolute;inset:0;background:radial-gradient(ellipse 60% 55% at 70% 30%,rgba(201,168,76,.10) 0%,transparent 65%),radial-gradient(ellipse 40% 40% at 10% 80%,rgba(201,168,76,.05) 0%,transparent 60%)}
+.hgrid{position:absolute;inset:0;background-image:linear-gradient(rgba(201,168,76,.025) 1px,transparent 1px),linear-gradient(90deg,rgba(201,168,76,.025) 1px,transparent 1px);background-size:80px 80px}
+
+/* ticker moved to bottom of hero */
+.ticker-wrap{position:absolute;bottom:0;left:0;right:0;overflow:hidden;border-top:1px solid rgba(201,168,76,.12);padding:.55rem 0;background:rgba(201,168,76,.02)}
+.ticker-track{display:flex;gap:3rem;animation:tick 26s linear infinite;width:max-content}
+.ti{font-size:.62rem;letter-spacing:.1em;color:rgba(201,168,76,.7);white-space:nowrap}
+.ti .up{color:var(--green)}
+@keyframes tick{from{transform:translateX(0)}to{transform:translateX(-50%)}}
+
+/* location pill */
+.hero-loc{display:inline-flex;align-items:center;gap:.5rem;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;color:var(--m);border:1px solid rgba(201,168,76,.18);padding:.35rem .9rem;margin-bottom:1.8rem;opacity:0;animation:fu .7s ease .2s forwards}
+.hero-loc::before{content:'';width:6px;height:6px;border-radius:50%;background:var(--green);flex-shrink:0}
+
+/* name block */
+.hname-wrap{margin-bottom:1.8rem;opacity:0;animation:fu .8s ease .4s forwards}
+.hname-first{font-family:'Syne',sans-serif;font-size:clamp(1rem,2.2vw,1.5rem);font-weight:600;letter-spacing:.3em;text-transform:uppercase;color:var(--m);margin-bottom:.3rem}
+.hname-last{font-family:'Playfair Display',serif;font-size:clamp(4.5rem,9vw,8.5rem);font-weight:900;line-height:.92;letter-spacing:-.03em;color:var(--w);display:block}
+.hname-last em{font-style:italic;color:var(--gold)}
+
+/* role title strip */
+.hero-role{display:flex;align-items:center;gap:1.2rem;margin-bottom:2rem;opacity:0;animation:fu .8s ease .6s forwards}
+.hero-role-text{font-family:'Syne',sans-serif;font-size:clamp(.95rem,1.8vw,1.2rem);font-weight:700;letter-spacing:.06em;color:var(--w)}
+.hero-role-sep{width:40px;height:1px;background:rgba(201,168,76,.4)}
+.hero-role-sub{font-size:.8rem;color:var(--gold);letter-spacing:.08em}
+
+/* description */
+.htag{max-width:580px;font-size:.88rem;line-height:1.9;color:#9A9890;margin-bottom:2.2rem;opacity:0;animation:fu .8s ease .75s forwards}
+.htag strong{color:var(--w);font-weight:400}
+
+/* badges row */
+.badges{display:flex;flex-wrap:wrap;gap:.6rem;margin-bottom:2.8rem;opacity:0;animation:fu .8s ease .9s forwards}
+.badge{font-size:.6rem;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);border:1px solid rgba(201,168,76,.25);padding:.3rem .8rem;background:rgba(201,168,76,.05);transition:background .2s}
+.badge:hover{background:rgba(201,168,76,.12)}
+
+/* stats row */
+.hstats{display:flex;gap:0;opacity:0;animation:fu .8s ease 1.05s forwards;border:1px solid rgba(201,168,76,.14);background:rgba(201,168,76,.03);width:fit-content}
+.hstat{padding:1.1rem 2.2rem;border-right:1px solid rgba(201,168,76,.14)}
+.hstat:last-child{border-right:none}
+.snum{font-family:'Syne',sans-serif;font-size:1.9rem;font-weight:800;color:var(--gold);line-height:1}
+.hslbl{font-size:.58rem;letter-spacing:.12em;text-transform:uppercase;color:var(--m);margin-top:.28rem}
+
+/* scroll hint */
+.hscroll{position:absolute;right:4.5rem;bottom:4rem;display:flex;flex-direction:column;align-items:center;gap:.6rem;opacity:0;animation:fi 1s ease 1.8s forwards}
+.hscroll span{font-size:.56rem;letter-spacing:.22em;text-transform:uppercase;color:var(--m);writing-mode:vertical-rl}
+.sbar{width:1px;height:50px;background:linear-gradient(to bottom,var(--gold),transparent);animation:pulse 2s ease-in-out infinite}
+
+/* side accent line */
+.hero-accent{position:absolute;top:0;right:8rem;width:1px;height:100%;background:linear-gradient(to bottom,transparent 15%,rgba(201,168,76,.12) 40%,rgba(201,168,76,.12) 60%,transparent 85%)}
+
+@keyframes pulse{0%,100%{opacity:1;transform:scaleY(1)}50%{opacity:.3;transform:scaleY(.5)}}
+@keyframes fu{from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:none}}
+@keyframes fi{from{opacity:0}to{opacity:1}}
+.si{max-width:1180px;margin:0 auto;padding:6rem 4.5rem}
+.slabel{font-size:.64rem;letter-spacing:.24em;text-transform:uppercase;color:var(--gold);margin-bottom:.9rem;display:flex;align-items:center;gap:1rem}
+.slabel::after{content:'';width:36px;height:1px;background:rgba(201,168,76,.35)}
+.stitle{font-family:'Playfair Display',serif;font-size:clamp(2rem,4.5vw,3.6rem);font-weight:900;line-height:1.05;margin-bottom:2.8rem}
+.stitle em{font-style:italic;color:var(--gold)}
+.gline{height:1px;background:linear-gradient(to right,transparent,rgba(201,168,76,.25),transparent)}
+#about{background:var(--d2)}
+.ag{display:grid;grid-template-columns:1.15fr .85fr;gap:5rem;align-items:start}
+.at p{font-size:.875rem;line-height:1.95;color:#AEAE9E;margin-bottom:1.3rem}
+.at p strong{color:var(--gold);font-weight:500}
+.acard{background:var(--d3);border:1px solid rgba(201,168,76,.13);padding:1.8rem}
+.ch{font-size:.63rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:1.4rem;padding-bottom:.9rem;border-bottom:1px solid rgba(201,168,76,.1)}
+.cr{display:flex;justify-content:space-between;align-items:flex-start;padding:.6rem 0;border-bottom:1px solid rgba(255,255,255,.035);font-size:.78rem;gap:1rem}
+.cr .k{color:var(--m);font-size:.68rem;flex-shrink:0}
+.cr .v{color:var(--w);text-align:right;line-height:1.4}
+.cr .vg{color:var(--green);text-align:right}
+.aw-row{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.aw{background:var(--d3);border:1px solid rgba(201,168,76,.13);padding:1.5rem;display:flex;align-items:flex-start;gap:1.2rem;transition:border-color .3s}
+.aw:hover{border-color:rgba(201,168,76,.35)}
+.awb{width:44px;height:44px;flex-shrink:0;display:flex;align-items:center;justify-content:center;font-size:1.3rem;background:rgba(201,168,76,.1);border:1px solid rgba(201,168,76,.2)}
+.awn{font-family:'Syne',sans-serif;font-size:.82rem;font-weight:700;color:var(--w);margin-bottom:.3rem}
+.awf{font-size:.67rem;letter-spacing:.06em;color:var(--gold);margin-bottom:.4rem}
+.awd{font-size:.74rem;line-height:1.7;color:var(--m)}
+#skills{background:var(--d)}
+.sg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.sb{background:var(--d3);border:1px solid rgba(201,168,76,.09);padding:1.7rem;transition:border-color .3s,transform .3s}
+.sb:hover{border-color:rgba(201,168,76,.35);transform:translateY(-3px)}
+.sbi{font-size:1.4rem;margin-bottom:.9rem}
+.sbt{font-family:'Syne',sans-serif;font-size:.7rem;font-weight:700;letter-spacing:.15em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem;padding-bottom:.7rem;border-bottom:1px solid rgba(201,168,76,.1)}
+.tag{display:inline-block;font-size:.67rem;letter-spacing:.04em;color:#AAAA9A;background:rgba(201,168,76,.06);border:1px solid rgba(201,168,76,.11);padding:.25rem .6rem;margin:.22rem .18rem .22rem 0;transition:background .2s,color .2s}
+.tag:hover{background:rgba(201,168,76,.15);color:var(--gold-p)}
+#experience{background:var(--d2)}
+.tl{position:relative;padding-left:2rem}
+.tl::before{content:'';position:absolute;left:0;top:8px;bottom:8px;width:1px;background:linear-gradient(to bottom,var(--gold),rgba(201,168,76,.1))}
+.tli{margin-bottom:3.2rem;position:relative}
+.tld{position:absolute;left:-2.38rem;top:7px;width:9px;height:9px;background:var(--gold);border-radius:50%;box-shadow:0 0 14px rgba(201,168,76,.55)}
+.tlp{font-size:.62rem;letter-spacing:.16em;text-transform:uppercase;color:var(--gold);margin-bottom:.35rem}
+.tlr{font-family:'Syne',sans-serif;font-size:1.1rem;font-weight:800;color:var(--w);margin-bottom:.15rem}
+.tlc{font-size:.76rem;color:var(--m);letter-spacing:.05em;margin-bottom:.9rem}
+.tlc span{color:var(--gold)}
+.tll{list-style:none}
+.tll li{font-size:.8rem;line-height:1.85;color:#AAAAAA;padding-left:1.3rem;position:relative;margin-bottom:.35rem}
+.tll li::before{content:'▸';position:absolute;left:0;color:var(--gold);font-size:.6rem;top:.2rem}
+.tll li strong{color:var(--gold-p);font-weight:500}
+#projects{background:var(--d)}
+.pg{display:grid;grid-template-columns:1fr 1fr;gap:1.3rem}
+.pc{background:var(--d3);border:1px solid rgba(201,168,76,.09);padding:2rem;position:relative;overflow:hidden;transition:border-color .3s,transform .3s;cursor:none}
+.pc::before{content:'';position:absolute;top:0;left:0;right:0;height:2px;background:linear-gradient(to right,var(--gold),transparent);transform:scaleX(0);transform-origin:left;transition:transform .4s ease}
+.pc:hover::before{transform:scaleX(1)}
+.pc:hover{border-color:rgba(201,168,76,.28);transform:translateY(-4px)}
+.pn{font-family:'Playfair Display',serif;font-size:3rem;font-weight:900;color:rgba(201,168,76,.07);position:absolute;top:.8rem;right:1.3rem;line-height:1}
+.pcat{font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;display:inline-block;background:rgba(201,168,76,.07);padding:.2rem .6rem;border:1px solid rgba(201,168,76,.14)}
+.pt{font-family:'Syne',sans-serif;font-size:1rem;font-weight:700;margin-bottom:.75rem;line-height:1.3}
+.pd{font-size:.77rem;line-height:1.8;color:#A0A090;margin-bottom:1.2rem}
+.pm{display:flex;gap:1.5rem;padding-top:.9rem;border-top:1px solid rgba(201,168,76,.07)}
+.me{font-size:.67rem;color:var(--m);letter-spacing:.05em}
+.me strong{display:block;font-size:.9rem;color:var(--gold-l);font-family:'Syne',sans-serif;margin-bottom:.15rem}
+#goals{background:var(--d2)}
+.gg{display:grid;grid-template-columns:1fr 1fr;gap:1.5rem}
+.gc{background:var(--d3);border:1px solid rgba(201,168,76,.13);padding:2.4rem;position:relative;overflow:hidden}
+.gc.feat{grid-column:span 2;background:linear-gradient(135deg,rgba(201,168,76,.09) 0%,var(--d3) 55%);border-color:rgba(201,168,76,.22)}
+.gby{font-family:'Playfair Display',serif;font-size:3.8rem;font-weight:900;color:rgba(201,168,76,.09);position:absolute;top:.5rem;right:1.3rem;line-height:1}
+.gl{font-size:.62rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem}
+.gtit{font-family:'Syne',sans-serif;font-size:1.2rem;font-weight:800;line-height:1.2;margin-bottom:.9rem}
+.gc.feat .gtit{font-size:1.65rem}
+.gtxt{font-size:.8rem;line-height:1.85;color:#AAAAAA}
+.gpills{display:flex;flex-wrap:wrap;gap:.5rem;margin-top:1.3rem}
+.gp{font-size:.62rem;letter-spacing:.06em;color:var(--gold-p);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.17);padding:.25rem .7rem}
+#education{background:var(--d)}
+.edg{display:grid;grid-template-columns:repeat(3,1fr);gap:1.3rem}
+.edc{background:var(--d3);border:1px solid rgba(201,168,76,.1);padding:1.8rem;transition:border-color .3s,transform .3s}
+.edc:hover{border-color:rgba(201,168,76,.3);transform:translateY(-3px)}
+.edi{font-size:1.6rem;margin-bottom:1rem}
+.edd{font-family:'Syne',sans-serif;font-size:.88rem;font-weight:700;color:var(--w);margin-bottom:.35rem;line-height:1.3}
+.eds{font-size:.72rem;color:var(--gold);letter-spacing:.04em;margin-bottom:.3rem}
+.edm{font-size:.68rem;color:var(--m)}
+.edgpa{display:inline-block;margin-top:.8rem;font-size:.68rem;letter-spacing:.08em;color:var(--gold-p);background:rgba(201,168,76,.08);border:1px solid rgba(201,168,76,.15);padding:.2rem .6rem}
+#values{background:var(--d2)}
+.vg{display:grid;grid-template-columns:repeat(4,1fr);gap:1.2rem}
+.vc{background:var(--d3);border:1px solid rgba(201,168,76,.09);padding:1.5rem;text-align:center;transition:border-color .3s,transform .3s}
+.vc:hover{border-color:rgba(201,168,76,.3);transform:translateY(-3px)}
+.vi{font-size:1.5rem;margin-bottom:.75rem}
+.vt{font-family:'Syne',sans-serif;font-size:.72rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:.45rem}
+.vd{font-size:.72rem;line-height:1.7;color:var(--m)}
+#contact{background:var(--d)}
+.cg{display:grid;grid-template-columns:1.2fr .8fr;gap:5rem;align-items:start}
+.fg{margin-bottom:1.1rem}
+.fl{font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;color:var(--gold);display:block;margin-bottom:.4rem}
+.fi,.fta{background:var(--d3);border:1px solid rgba(201,168,76,.14);color:var(--w);font-family:'DM Mono',monospace;font-size:.8rem;padding:.8rem 1rem;outline:none;transition:border-color .25s;width:100%}
+.fi:focus,.fta:focus{border-color:rgba(201,168,76,.45)}
+.fta{min-height:110px;resize:none}
+.bsend{background:var(--gold);color:var(--d);font-family:'Syne',sans-serif;font-size:.75rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;padding:.95rem 2rem;border:none;cursor:none;transition:background .2s,transform .2s}
+.bsend:hover{background:var(--gold-l);transform:translateY(-2px)}
+.cls{display:flex;flex-direction:column;gap:1.1rem}
+.cl{display:flex;align-items:center;gap:1rem;text-decoration:none;color:inherit;background:var(--d3);border:1px solid rgba(201,168,76,.1);padding:1.1rem 1.3rem;transition:border-color .3s,transform .3s}
+.cl:hover{border-color:rgba(201,168,76,.3);transform:translateX(4px)}
+.cli{width:38px;height:38px;background:rgba(201,168,76,.1);display:flex;align-items:center;justify-content:center;font-size:.9rem;color:var(--gold);flex-shrink:0}
+.cll{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--m)}
+.clv{font-size:.82rem;color:var(--w);margin-top:.12rem}
+footer{background:var(--d2);border-top:1px solid rgba(201,168,76,.08);padding:2rem 4.5rem;display:flex;justify-content:space-between;align-items:center}
+.fb{font-family:'Playfair Display',serif;font-size:1.1rem;font-weight:900;color:var(--gold)}
+.fc{font-size:.67rem;color:var(--m);letter-spacing:.05em}
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .65s ease,transform .65s ease}
+.reveal.on{opacity:1;transform:none}
+@media(max-width:900px){nav{padding:1rem 1.5rem}.nav-links{display:none}.si{padding:3.5rem 1.5rem}#hero{padding:0 1.5rem 4rem}.hscroll{display:none}.ag,.cg,.gg{grid-template-columns:1fr}.gc.feat{grid-column:span 1}.sg,.pg,.vg,.edg,.aw-row{grid-template-columns:1fr 1fr}}
+@media(max-width:560px){.sg,.pg,.vg,.edg,.aw-row{grid-template-columns:1fr}.hstats{gap:1.8rem;flex-wrap:wrap}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div>
+<div class="rng" id="rng"></div>
+
+<nav>
+  <div class="logo">Parthan <span>Patel</span></div>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#skills">Skills</a></li>
+    <li><a href="#experience">Experience</a></li>
+    <li><a href="#projects">Projects</a></li>
+    <li><a href="#goals">Goals</a></li>
+    <li><a href="#education">Education</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <button class="btn-hire" onclick="document.getElementById('contact').scrollIntoView({behavior:'smooth'})">Hire Me</button>
+</nav>
+
+<section id="hero">
+  <div class="hbg"></div>
+  <div class="hgrid"></div>
+  <div class="hero-accent"></div>
+
+  <!-- Location pill -->
+  <div class="hero-loc">Dallas, TX &nbsp;·&nbsp; Open to Relocation</div>
+
+  <!-- Name block -->
+  <div class="hname-wrap">
+    <div class="hname-first">Parthan</div>
+    <span class="hname-last"><em>Patel</em></span>
+  </div>
+
+  <!-- Role strip -->
+  <div class="hero-role">
+    <span class="hero-role-text">Senior Financial Analyst &nbsp;/&nbsp; FP&amp;A</span>
+    <span class="hero-role-sep"></span>
+    <span class="hero-role-sub">Deloitte &middot; Lennox International &middot; UT Dallas</span>
+  </div>
+
+  <!-- Description -->
+  <p class="htag">4+ years turning financial complexity into strategic clarity. From <strong>Deloitte</strong> consulting on $300M decisions to earning <strong>Lennox's Diamond Award</strong> — I build models, dashboards, and insights that move executives to act. Open to <strong>Senior Financial Analyst, FP&amp;A, and Finance roles</strong> at any company size or industry.</p>
+
+  <!-- Credential badges -->
+  <div class="badges">
+    <span class="badge">&#x1F3C6; Diamond Award — Lennox</span>
+    <span class="badge">Chartered Accountant · 4.00 GPA</span>
+    <span class="badge">MS Financial Math · UTD · 3.95</span>
+    <span class="badge">SAP S/4HANA Certified</span>
+    <span class="badge">Deloitte Alum</span>
+  </div>
+
+  <!-- Stats bar -->
+  <div class="hstats">
+    <div class="hstat"><div class="snum">4+</div><div class="hslbl">Years Experience</div></div>
+    <div class="hstat"><div class="snum">$300M+</div><div class="hslbl">Deals Supported</div></div>
+    <div class="hstat"><div class="snum">40%</div><div class="hslbl">Reporting Efficiency ↑</div></div>
+    <div class="hstat"><div class="snum">3.95</div><div class="hslbl">MS GPA · UT Dallas</div></div>
+  </div>
+
+  <!-- Bottom ticker -->
+  <div class="ticker-wrap">
+    <div class="ticker-track">
+      <span class="ti">LENNOX INTERNATIONAL <span class="up">&#9679; ACTIVE CO-OP</span></span>
+      <span class="ti">FP&amp;A · STRATEGIC FINANCE <span class="up">&#9650; EXPERT</span></span>
+      <span class="ti">DELOITTE ALUM <span class="up">&#9679; $150M–$300M DEALS</span></span>
+      <span class="ti">$100M+ DASHBOARDS <span class="up">&#9650; BUILT &amp; AUTOMATED</span></span>
+      <span class="ti">CHARTERED ACCOUNTANT <span class="up">&#9679; 4.00 GPA</span></span>
+      <span class="ti">MS FINANCIAL MATH <span class="up">&#9679; UT DALLAS · 3.95</span></span>
+      <span class="ti">EXCEL · VBA · SQL · PYTHON <span class="up">&#9650; ADVANCED</span></span>
+      <span class="ti">DIAMOND AWARD WINNER <span class="up">&#9650; LENNOX</span></span>
+      <span class="ti">SAP S/4HANA CERTIFIED <span class="up">&#9650;</span></span>
+      <span class="ti">LENNOX INTERNATIONAL <span class="up">&#9679; ACTIVE CO-OP</span></span>
+      <span class="ti">FP&amp;A · STRATEGIC FINANCE <span class="up">&#9650; EXPERT</span></span>
+      <span class="ti">DELOITTE ALUM <span class="up">&#9679; $150M–$300M DEALS</span></span>
+      <span class="ti">$100M+ DASHBOARDS <span class="up">&#9650; BUILT &amp; AUTOMATED</span></span>
+      <span class="ti">CHARTERED ACCOUNTANT <span class="up">&#9679; 4.00 GPA</span></span>
+      <span class="ti">MS FINANCIAL MATH <span class="up">&#9679; UT DALLAS · 3.95</span></span>
+      <span class="ti">EXCEL · VBA · SQL · PYTHON <span class="up">&#9650; ADVANCED</span></span>
+      <span class="ti">DIAMOND AWARD WINNER <span class="up">&#9650; LENNOX</span></span>
+      <span class="ti">SAP S/4HANA CERTIFIED <span class="up">&#9650;</span></span>
+    </div>
+  </div>
+
+  <div class="hscroll"><div class="sbar"></div><span>Scroll</span></div>
+</section>
+<div class="gline"></div>
+
+<section id="about">
+  <div class="si">
+    <div class="ag reveal">
+      <div class="at">
+        <div class="slabel">01 &mdash; About Me</div>
+        <h2 class="stitle">The analyst who sees <em>beyond the numbers.</em></h2>
+        <p>I&rsquo;m Parthan Patel &mdash; currently a Finance &amp; Sourcing Analytics Co-op at <strong>Lennox International</strong> in Dallas, TX, and finishing my <strong>MS in Financial Mathematics at UT Dallas</strong> (GPA: 3.95, graduating May 2026). My career spans FP&amp;A, strategic consulting, controllership, and audit across the US and India.</p>
+        <p>My work earned me Lennox&rsquo;s <strong>Diamond Award</strong> &mdash; the company&rsquo;s highest recognition &mdash; for an innovative financial solution that resolved a critical challenge. Before Lennox, I was at <strong>Deloitte</strong> advising on $150M&ndash;$300M strategic investment decisions as a Strategic Finance Consultant.</p>
+        <p>I&rsquo;m a <strong>Chartered Accountant</strong> (India&rsquo;s CPA equivalent, 4.00 GPA) and <strong>SAP S/4 HANA certified</strong>. I believe great financial work isn&rsquo;t just accurate &mdash; it&rsquo;s a <strong>story that drives bold decisions</strong>, built with precision and delivered with clarity.</p>
+      </div>
+      <div class="acard">
+        <div class="ch">// Quick Profile</div>
+        <div class="cr"><span class="k">Name</span><span class="v">Parthan Patel</span></div>
+        <div class="cr"><span class="k">Target Roles</span><span class="v">Sr. Financial Analyst · FP&amp;A · Finance Analyst</span></div>
+        <div class="cr"><span class="k">Current</span><span class="v">Lennox International</span></div>
+        <div class="cr"><span class="k">Location</span><span class="v">Dallas, TX</span></div>
+        <div class="cr"><span class="k">Email</span><span class="v">parthan.usa@gmail.com</span></div>
+        <div class="cr"><span class="k">Phone</span><span class="v">(442) 340-8844</span></div>
+        <div class="cr"><span class="k">Open To</span><span class="v">Startups · Mid-Market · Fortune 500</span></div>
+        <div class="cr"><span class="k">Industries</span><span class="v">All Industries Welcome</span></div>
+      </div>
+    </div>
+    <div class="slabel reveal" style="margin-top:3.5rem;margin-bottom:1rem;">// Recognition &amp; Awards</div>
+    <div class="aw-row reveal">
+      <div class="aw">
+        <div class="awb">&#x1F48E;</div>
+        <div>
+          <div class="awn">Diamond Award &mdash; Lennox International</div>
+          <div class="awf">Highest Company Honor</div>
+          <div class="awd">Awarded to our team for developing an innovative solution that resolved a critical financial challenge &mdash; the pinnacle of performance recognition at Lennox.</div>
+        </div>
+      </div>
+      <div class="aw">
+        <div class="awb">&#x1F948;</div>
+        <div>
+          <div class="awn">Silver Award &mdash; Lennox International</div>
+          <div class="awf">Third-Highest Company Honor</div>
+          <div class="awd">Recognized for delivering critical financial intelligence that directly supported strategic executive decision-making at the leadership level.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="skills">
+  <div class="si">
+    <div class="slabel reveal">02 &mdash; Skills &amp; Expertise</div>
+    <h2 class="stitle reveal">A toolkit <em>built to perform.</em></h2>
+    <div class="sg">
+      <div class="sb reveal"><div class="sbi">&#x1F4CA;</div><div class="sbt">Core Finance</div><span class="tag">FP&amp;A</span><span class="tag">Budgeting</span><span class="tag">Forecasting</span><span class="tag">Variance Analysis</span><span class="tag">Financial Modeling</span><span class="tag">Scenario Planning</span><span class="tag">P&amp;L Management</span><span class="tag">OPEX / CAPEX</span><span class="tag">Cash Flow Forecasting</span><span class="tag">KPI Reporting</span><span class="tag">AOP</span><span class="tag">Long-Range Planning</span></div>
+      <div class="sb reveal"><div class="sbi">&#x1F6E0;&#xFE0F;</div><div class="sbt">Systems &amp; Platforms</div><span class="tag">SAP S/4 HANA</span><span class="tag">SAP BPC</span><span class="tag">Oracle Hyperion</span><span class="tag">Anaplan</span><span class="tag">Essbase</span><span class="tag">Cognos</span><span class="tag">Workday</span><span class="tag">Alteryx</span><span class="tag">Looker</span><span class="tag">MS Access</span></div>
+      <div class="sb reveal"><div class="sbi">&#x1F4BB;</div><div class="sbt">Analytics &amp; Coding</div><span class="tag">Excel (VBA, Macros)</span><span class="tag">SQL</span><span class="tag">Python (Pandas)</span><span class="tag">Power BI</span><span class="tag">Tableau</span><span class="tag">Power Query</span><span class="tag">XLOOKUP</span><span class="tag">INDEX/MATCH</span><span class="tag">PivotTables</span></div>
+      <div class="sb reveal"><div class="sbi">&#x1F4C8;</div><div class="sbt">FP&amp;A &amp; Reporting</div><span class="tag">Management Reporting</span><span class="tag">Rolling Forecasts</span><span class="tag">Process Automation</span><span class="tag">Dashboarding</span><span class="tag">Ad Hoc Analysis</span><span class="tag">Reporting Automation</span><span class="tag">Business Metrics</span></div>
+      <div class="sb reveal"><div class="sbi">&#x1F50D;</div><div class="sbt">Strategy &amp; Control</div><span class="tag">Business Partnering</span><span class="tag">Cost Optimization</span><span class="tag">Risk Analysis</span><span class="tag">Financial Controllership</span><span class="tag">Internal Controls</span><span class="tag">M&amp;A Support</span><span class="tag">Due Diligence</span></div>
+      <div class="sb reveal"><div class="sbi">&#x1F393;</div><div class="sbt">Credentials</div><span class="tag">Chartered Accountant (India)</span><span class="tag">SAP Group Reporting Assoc.</span><span class="tag">MS Financial Math (2026)</span><span class="tag">B.Com Accounting &amp; Audit</span><span class="tag">GPA 3.95 (MS)</span><span class="tag">GPA 4.00 (CA)</span></div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="experience">
+  <div class="si">
+    <div class="slabel reveal">03 &mdash; Work Experience</div>
+    <h2 class="stitle reveal">Where I&rsquo;ve <em>made an impact.</em></h2>
+    <div class="tl reveal">
+      <div class="tli">
+        <div class="tld"></div>
+        <div class="tlp">Jun 2025 &mdash; Present</div>
+        <div class="tlr">Finance &amp; Sourcing Analytics Co-op</div>
+        <div class="tlc"><span>Lennox International Inc.</span> &middot; Dallas, TX, USA</div>
+        <ul class="tll">
+          <li>Built and automated executive financial dashboards consolidating <strong>$100M+ revenue performance</strong>, P&amp;L trends, budget variances, OPEX, and CAPEX &mdash; improving reporting efficiency by <strong>40%</strong></li>
+          <li>Developed input-based financial models (Excel VBA, XLOOKUP, SQL, Tableau) for quarterly forecasts, long-range planning, and variance analysis &mdash; improving forecast accuracy by <strong>15%</strong></li>
+          <li>Designed scenario-based forecasting models and KPI reporting to measure business performance and deliver actionable insights to leadership</li>
+          <li>Partnered with FP&amp;A, BPO, and cross-functional stakeholders to reconcile <strong>$10M+ monthly transactions</strong> and strengthen financial controllership</li>
+          <li>Managed cash flow forecasting for a <strong>$50M+ operating budget</strong>, reducing cash flow variances by <strong>20%</strong> and identifying <strong>$10M+ in cost-saving opportunities</strong></li>
+          <li>Earned <strong>Diamond Award</strong> (highest company recognition) and <strong>Silver Award</strong> for financial innovation and strategic impact</li>
+        </ul>
+      </div>
+      <div class="tli">
+        <div class="tld"></div>
+        <div class="tlp">Feb 2023 &mdash; Aug 2023</div>
+        <div class="tlr">Consultant &mdash; Strategic Finance</div>
+        <div class="tlc"><span>Deloitte</span> &middot; Ahmedabad, India</div>
+        <ul class="tll">
+          <li>Built financial models and scenario analyses supporting <strong>$150M&ndash;$300M strategic investment decisions</strong>, translating complex data into actionable insights for executive leadership</li>
+          <li>Implemented SAP BPC planning solutions, improving forecast accuracy by <strong>30%</strong> and enhancing FP&amp;A reporting</li>
+          <li>Reduced reporting cycle time by <strong>20%</strong> through SAP S/4 HANA implementation and improved data integration</li>
+          <li>Partnered cross-functionally with finance, operations, and commercial teams to align financial plans with business objectives</li>
+        </ul>
+      </div>
+      <div class="tli">
+        <div class="tld"></div>
+        <div class="tlp">Mar 2022 &mdash; Feb 2023</div>
+        <div class="tlr">Senior Financial Analyst</div>
+        <div class="tlc"><span>Parth Poly Valves Pvt. Ltd.</span> &middot; Ahmedabad, India</div>
+        <ul class="tll">
+          <li>Led end-to-end FP&amp;A for a <strong>$10M+ corporate budget</strong>, owning quarterly P&amp;L forecasting, planning cycles, and variance analysis</li>
+          <li>Automated reporting using SQL, SAP, Power BI, and Tableau &mdash; improving efficiency by <strong>10%</strong> and reducing turnaround by <strong>30%</strong></li>
+          <li>Reduced <strong>financial risk exposure by 20%</strong> through deep-dive analysis of business drivers and cost inefficiencies</li>
+        </ul>
+      </div>
+      <div class="tli">
+        <div class="tld"></div>
+        <div class="tlp">Dec 2019 &mdash; Mar 2022</div>
+        <div class="tlr">Audit Associate</div>
+        <div class="tlc"><span>Sorab S. Engineer &amp; Co.</span> &middot; Ahmedabad, India</div>
+        <ul class="tll">
+          <li>Performed product cost analysis and audits identifying <strong>15% cost-saving opportunities</strong></li>
+          <li>Implemented internal controls reducing data entry errors by <strong>40%</strong></li>
+          <li>Identified <strong>$3M+ in annualized cost inefficiencies</strong> through SKU-level material flow and overhead absorption mapping</li>
+        </ul>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="projects">
+  <div class="si">
+    <div class="slabel reveal">04 &mdash; Academic &amp; Professional Projects</div>
+    <h2 class="stitle reveal">Work that <em>speaks for itself.</em></h2>
+    <div class="pg">
+      <div class="pc reveal">
+        <div class="pn">01</div>
+        <div class="pcat">Equity Research &middot; Valuation</div>
+        <div class="pt">24-Month Stock Price Forecasting: Hims &amp; Hers vs. Palantir</div>
+        <div class="pd">Comparative financial analysis of HIMS and PLTR to support an equity investment decision. Built models forecasting 24-month stock prices using historical trends, growth assumptions, and operating performance. Delivered a data-driven buy recommendation backed by quantitative analysis.</div>
+        <div class="pm"><div class="me"><strong>2 Cos</strong>Analyzed</div><div class="me"><strong>24-Mo</strong>Forecast</div><div class="me"><strong>UT Dallas</strong>Dec 2024</div></div>
+      </div>
+      <div class="pc reveal">
+        <div class="pn">02</div>
+        <div class="pcat">Macro &middot; Risk Analysis</div>
+        <div class="pt">Financial Analysis of AIG&rsquo;s 2008 Collapse</div>
+        <div class="pd">Deep financial analysis of AIG&rsquo;s collapse focusing on subprime mortgage exposure, credit default swaps, and leverage-driven risk. Evaluated liquidity pressures and weak risk controls. Presented findings on systemic risk drivers and broader market impact.</div>
+        <div class="pm"><div class="me"><strong>CDS</strong>Instruments</div><div class="me"><strong>2008</strong>Crisis</div><div class="me"><strong>UT Dallas</strong>Dec 2024</div></div>
+      </div>
+      <div class="pc reveal">
+        <div class="pn">03</div>
+        <div class="pcat">Database &middot; SQL &middot; Automation</div>
+        <div class="pt">Automated Parking Lot Management System</div>
+        <div class="pd">Designed and built a fully automated parking management system in SQL to handle vehicle entry/exit, slot allocation, and payment tracking. Built optimized database structures for real-time availability and automated record management, significantly reducing manual intervention.</div>
+        <div class="pm"><div class="me"><strong>SQL</strong>Stack</div><div class="me"><strong>Full</strong>Automation</div><div class="me"><strong>UT Dallas</strong>May 2025</div></div>
+      </div>
+      <div class="pc reveal">
+        <div class="pn">04</div>
+        <div class="pcat">FP&amp;A &middot; Executive Reporting</div>
+        <div class="pt">$100M Revenue Dashboard &mdash; Lennox International</div>
+        <div class="pd">Built and automated executive dashboards at Lennox consolidating $100M+ revenue, P&amp;L trends, budget variances, OPEX, and CAPEX. Improved reporting efficiency by 40% and directly supported C-suite decision-making. Recognized with the Diamond Award &mdash; Lennox&rsquo;s highest honor.</div>
+        <div class="pm"><div class="me"><strong>$100M+</strong>Revenue</div><div class="me"><strong>40%</strong>Efficiency</div><div class="me"><strong>Diamond</strong>Award</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="goals">
+  <div class="si">
+    <div class="slabel reveal">05 &mdash; Vision &amp; Goals</div>
+    <h2 class="stitle reveal">Not just a career &mdash; <em>a mission.</em></h2>
+    <div class="gg">
+      <div class="gc feat reveal">
+        <div class="gby">2035</div>
+        <div class="gl">// Ultimate Goal</div>
+        <div class="gtit">Become a Chief Financial Officer driving enterprise-level strategy</div>
+        <div class="gtxt">My long-term ambition is the CFO seat &mdash; not just for the title, but to be the strategic financial architect at the center of how a company operates, allocates capital, and grows. With a foundation spanning audit, controllership, FP&amp;A, and Deloitte-level consulting, I&rsquo;m building toward total command of the finance function &mdash; the person in the boardroom connecting financial rigor to bold business vision.</div>
+        <div class="gpills"><span class="gp">Board Reporting</span><span class="gp">Capital Allocation</span><span class="gp">M&amp;A Leadership</span><span class="gp">Investor Relations</span><span class="gp">Enterprise Strategy</span><span class="gp">P&amp;L Ownership</span></div>
+      </div>
+      <div class="gc reveal">
+        <div class="gby">2026</div>
+        <div class="gl">// 1-Year Goal</div>
+        <div class="gtit">Complete MS &amp; land a full-time Senior Financial Analyst or FP&amp;A role</div>
+        <div class="gtxt">Graduate with my Master&rsquo;s in Financial Mathematics from UT Dallas (May 2026, GPA 3.95). Transition into a full-time Senior Financial Analyst or FP&amp;A role at a company where I can own meaningful financial work &mdash; whether that&rsquo;s a startup, mid-market firm, or large enterprise.</div>
+        <div class="gpills"><span class="gp">MS Graduation</span><span class="gp">Full-Time Offer</span><span class="gp">Sr. Analyst / FP&amp;A</span><span class="gp">Any Industry</span></div>
+      </div>
+      <div class="gc reveal">
+        <div class="gby">2028</div>
+        <div class="gl">// 5-Year Goal</div>
+        <div class="gtit">Finance Manager / Director of FP&amp;A leading a high-performing team</div>
+        <div class="gtxt">Lead a finance team with full P&amp;L ownership &mdash; driving planning cycles, building scalable financial infrastructure, and mentoring analysts. I want to be the person who shapes how a company thinks about money, not just reports it. Open to high-growth startups, private equity-backed firms, and established enterprises alike.</div>
+        <div class="gpills"><span class="gp">FP&amp;A Director</span><span class="gp">Team Leadership</span><span class="gp">P&amp;L Ownership</span><span class="gp">Global Exposure</span></div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="education">
+  <div class="si">
+    <div class="slabel reveal">06 &mdash; Education &amp; Credentials</div>
+    <h2 class="stitle reveal">Academic foundation <em>built to last.</em></h2>
+    <div class="edg">
+      <div class="edc reveal"><div class="edi">&#x1F393;</div><div class="edd">Master of Science in Financial Mathematics</div><div class="eds">University of Texas at Dallas &middot; USA</div><div class="edm">Expected May 2026</div><span class="edgpa">GPA: 3.95 / 4.00</span></div>
+      <div class="edc reveal"><div class="edi">&#x1F4DC;</div><div class="edd">Chartered Accountant (India) &mdash; US-CPA Equivalent</div><div class="eds">Institute of Chartered Accountants of India</div><div class="edm">Completed Dec 2021</div><span class="edgpa">GPA: 4.00 / 4.00</span></div>
+      <div class="edc reveal"><div class="edi">&#x1F3DB;&#xFE0F;</div><div class="edd">Bachelor of Commerce &mdash; Accounting &amp; Auditing</div><div class="eds">GLS University, India</div><div class="edm">Graduated May 2020</div><span class="edgpa">GPA: 3.60 / 4.00</span></div>
+    </div>
+    <div class="slabel reveal" style="margin-top:2.5rem;margin-bottom:.9rem;">// Certification</div>
+    <div class="aw reveal" style="max-width:500px;">
+      <div class="awb">&#x1F3C5;</div>
+      <div><div class="awn">SAP Group Reporting Associate &mdash; S/4 HANA</div><div class="awf">SAP Certified &middot; Enterprise Financial Reporting</div><div class="awd">Certified in SAP Group Reporting on S/4 HANA, validating expertise in financial consolidation, planning, and enterprise reporting workflows.</div></div>
+    </div>
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="values">
+  <div class="si">
+    <div class="slabel reveal">07 &mdash; What Sets Me Apart</div>
+    <h2 class="stitle reveal">Why I stand out from <em>the crowd.</em></h2>
+
+    <!-- Unique differentiators - the bold claims -->
+    <div style="display:grid;grid-template-columns:1fr 1fr;gap:1.3rem;margin-bottom:1.8rem;">
+
+      <div class="vc reveal" style="text-align:left;padding:2rem;grid-column:span 2;background:linear-gradient(135deg,rgba(201,168,76,.08) 0%,var(--d3) 60%);">
+        <div style="font-family:'Syne',sans-serif;font-size:.65rem;font-weight:700;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.7rem;">// The Rare Combo</div>
+        <div style="font-family:'Playfair Display',serif;font-size:1.5rem;font-weight:900;line-height:1.2;margin-bottom:.9rem;">I am a <em style="color:var(--gold)">Chartered Accountant + MS-level quant + FP&amp;A practitioner</em> — in one person.</div>
+        <div style="font-size:.82rem;line-height:1.85;color:#AAAAAA;">Most financial analysts come from one lane: either pure accounting, or corporate finance, or data analytics. I bring all three. My CA certification gave me deep controllership foundations. Deloitte sharpened my consulting and modeling instincts. UT Dallas is adding graduate-level quantitative rigor — stochastic modeling, derivatives pricing, financial mathematics. The result: an analyst who can audit, model, automate, and advise — simultaneously.</div>
+      </div>
+
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">🏆</div>
+        <div class="vt">Award-Winning Work</div>
+        <div class="vd">Not just a participant — a Diamond Award winner. Lennox's highest company honor for financial innovation. Most analysts never receive a single company-wide award. I have two.</div>
+      </div>
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">🌏</div>
+        <div class="vt">Dual-Continent Experience</div>
+        <div class="vd">Big 4 consulting in India (Deloitte) + Fortune 500 analytics in the US (Lennox). Cross-cultural business exposure builds adaptable analysts who understand global financial contexts most US-only candidates simply don't.</div>
+      </div>
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">⚙️</div>
+        <div class="vt">I Build, Not Just Report</div>
+        <div class="vd">I've automated dashboards that saved 6+ hours/week, models that cut cash flow variance by 20%, and SQL systems that eliminated manual work entirely. I don't maintain spreadsheets — I replace them with infrastructure.</div>
+      </div>
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">📐</div>
+        <div class="vt">Quant Meets Finance</div>
+        <div class="vd">My MS in Financial Mathematics at UT Dallas goes beyond Excel. I'm studying stochastic calculus, financial derivatives, and algorithmic modeling — skills that give me an edge in data-heavy FP&A, equity analysis, and forecasting.</div>
+      </div>
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">🤝</div>
+        <div class="vt">True Business Partner</div>
+        <div class="vd">At Deloitte and Lennox, I didn't sit behind a screen. I partnered with BPO, FP&A, and C-suite stakeholders to reconcile $10M+ in transactions and shape decisions. Finance is a team sport — I play it that way.</div>
+      </div>
+      <div class="vc reveal" style="text-align:left;padding:1.8rem;">
+        <div class="vi">📊</div>
+        <div class="vt">Full Finance Stack</div>
+        <div class="vd">Audit → Controllership → Consulting → FP&A. I've touched every layer of the finance function. That full-stack perspective makes me a faster, sharper analyst — I understand where numbers come from and where they need to go.</div>
+      </div>
+
+    </div>
+
+
+  </div>
+</section>
+<div class="gline"></div>
+
+<section id="contact">
+  <div class="si">
+    <div class="slabel reveal">08 &mdash; Contact</div>
+    <h2 class="stitle reveal">Let&rsquo;s build something <em>great together.</em></h2>
+    <div class="cg">
+      <form class="reveal" onsubmit="sub(event)">
+        <div class="fg"><label class="fl">Your Name</label><input class="fi" type="text" placeholder="Jane Smith" required></div>
+        <div class="fg"><label class="fl">Company / Organization</label><input class="fi" type="text" placeholder="Acme Corp"></div>
+        <div class="fg"><label class="fl">Email</label><input class="fi" type="email" placeholder="jane@acmecorp.com" required></div>
+        <div class="fg"><label class="fl">Message</label><textarea class="fta" placeholder="Tell me about the opportunity..."></textarea></div>
+        <button class="bsend" type="submit">Send Message &#8594;</button>
+        <p id="fmsg" style="display:none;margin-top:.7rem;font-size:.76rem;color:var(--green);">&#10003; Sent! I&rsquo;ll get back to you soon.</p>
+      </form>
+      <div class="cls reveal">
+        <a class="cl" href="mailto:parthan.usa@gmail.com"><div class="cli">&#x2709;</div><div><div class="cll">Email</div><div class="clv">parthan.usa&#64;gmail.com</div></div></a>
+        <a class="cl" href="tel:+14423408844"><div class="cli">&#x1F4DE;</div><div><div class="cll">Phone</div><div class="clv">(442) 340-8844</div></div></a>
+        <a class="cl" href="https://www.linkedin.com/in/parthanpatel" target="_blank"><div class="cli">in</div><div><div class="cll">LinkedIn</div><div class="clv">linkedin.com/in/parthanpatel</div></div></a>
+        <a class="cl" href="#"><div class="cli">&#x1F4C4;</div><div><div class="cll">Resume</div><div class="clv">Download PDF Resume</div></div></a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="fb">Parthan Patel</div>
+  <div class="fc">&copy; 2025 Parthan Patel &middot; Senior Financial Analyst &middot; FP&amp;A &middot; Dallas, TX &middot; Open to All Opportunities</div>
+</footer>
+
+<script>
+const cur=document.getElementById('cur'),rng=document.getElementById('rng');
+let mx=0,my=0,rx=0,ry=0;
+document.addEventListener('mousemove',e=>{mx=e.clientX;my=e.clientY;cur.style.left=mx+'px';cur.style.top=my+'px'});
+(function a(){rx+=(mx-rx)*.12;ry+=(my-ry)*.12;rng.style.left=rx+'px';rng.style.top=ry+'px';requestAnimationFrame(a)})();
+document.querySelectorAll('a,button,.pc,.sb,.vc,.edc,.aw,.gc').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.width='18px';cur.style.height='18px';rng.style.width='50px';rng.style.height='50px'});
+  el.addEventListener('mouseleave',()=>{cur.style.width='10px';cur.style.height='10px';rng.style.width='34px';rng.style.height='34px'});
+});
+const obs=new IntersectionObserver(entries=>{
+  entries.forEach((e,i)=>{if(e.isIntersecting){setTimeout(()=>e.target.classList.add('on'),i*60);obs.unobserve(e.target);}});
+},{threshold:.08});
+document.querySelectorAll('.reveal').forEach(el=>obs.observe(el));
+function sub(e){e.preventDefault();document.getElementById('fmsg').style.display='block';e.target.reset();}
+</script>
+</body>
+</html>
